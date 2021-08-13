@@ -1,18 +1,22 @@
 from tkinter import *
 from tkinter import messagebox
-from PIL import Image,ImageTk
 
+""" A Python project to create a simple calculator GUI using tkinter"""
+
+#creating a window
 root = Tk()
 root.title("My Calculator")
-root.maxsize(width=263,height=245)
-root.minsize(width=263,height=245)
-root.configure(bg="gray")
 root.iconbitmap('cal.ico')
-pho=ImageTk.PhotoImage(Image.open("cool.png"))
-lab=Label(image=pho)
+#added an image in the background
+pho=PhotoImage(file="cool.png")
+lab=Label(root,image=pho)
 lab.pack()
 
+#set the max and min size of window with min max method
+root.maxsize(width=263,height=245)
+root.minsize(width=263,height=245)
 
+#creating a entry widget
 equation = StringVar()
 e=Entry(root,width=29,borderwidth=8,font=("Comic Sans MS",10,'bold'),bg="light gray",fg="red",textvariable=equation)
 e.place(x=5,y=5)
@@ -33,19 +37,22 @@ def about():
     messagebox.showinfo("About My Calculator",
                         "This is a simple calculator GUI developed using Tkinter\n BY : Shasmit Basnet")
 
-
+#creating menu bar
 mine_menu = Menu(root)
 root.config(menu=mine_menu)
 
-menu11 = Menu(mine_menu, tearoff=0)
-mine_menu.add_cascade(label="INFO", menu=menu11)
+# Info menu with operators info option
+menu11 = Menu(mine_menu,bg="light gray",tearoff=0)
+mine_menu.add_cascade(label="INFO",menu=menu11)
 menu11.add_command(label="Operators info",font=("Comic Sans MS",8,'bold'), command=info)
 
-menu2 = Menu(mine_menu, tearoff=0)
-mine_menu.add_cascade(label="ABOUT", menu=menu2)
+#about menu with about my calculator option
+menu2 = Menu(mine_menu,bg="light gray", tearoff=0)
+mine_menu.add_cascade(label="ABOUT",menu=menu2)
 menu2.add_command(label="About my calculator",font=("Comic Sans MS",8,'bold'), command=about)
 
 
+#defining operator functions
 def button_click(number):
     num = e.get()
     e.delete(0, END)
@@ -54,6 +61,7 @@ def button_click(number):
 
 def button_clear():
     e.delete(0, END)
+
 
 
 def button_equal():
@@ -68,6 +76,7 @@ def button_equal():
         e.insert(0, "Error")
         messagebox.showerror("Error", "Please perform valid calculations")
 
+# creating buttons
 b7=Button(root,text="7",width=6,height=2,borderwidth=4,font=("Comic Sans MS",8,'bold'),bg="khaki",fg="black",command=lambda : button_click(7))
 b8=Button(root,text="8",width=6,height=2,borderwidth=4,font=("Comic Sans MS",8,'bold'),bg="khaki",fg="black",command=lambda : button_click(8))
 b9=Button(root,text="9",width=6,height=2,borderwidth=4,font=("Comic Sans MS",8,'bold'),bg="khaki",fg="black",command=lambda : button_click(9))
@@ -111,4 +120,5 @@ sub.place(x=130,y=180)
 button_equal.place(x=185,y=180)
 
 root.mainloop()
+
 
